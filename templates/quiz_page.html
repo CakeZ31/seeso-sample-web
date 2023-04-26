@@ -2,6 +2,14 @@
 <html>
 <head>
 <style>
+  @font-face {
+    font-family: 'Dys';
+    src: url('OpenDyslexic-Regular.otf');
+  } 
+   * {
+    line-height:200%;
+    color: #191A42;
+   }
 
   .container {
     position: absolute;
@@ -12,6 +20,7 @@
     background-color: #0000;
   }
   p{
+    font-family:Dys;
     text-align: center;
     color: #ffffff;
 
@@ -19,8 +28,9 @@
   }
   button {
   	color: #ffffff;
+    font-family:Dys;
     font-weight: bolder;
-    font-size: xx-large;
+    font-size: 40px;
     border-color: #ffffff;
     border-width: thick;
     border-radius: 5% 5% 5% 5%;
@@ -32,7 +42,7 @@
     position: relative;
   	top: 2%;
     left: 5%;
-    height: 50%;
+    height: 40%;
     width: 40%;
     background-color: #ffb000;
   }
@@ -40,7 +50,7 @@
     position: relative;
   	top: 2%;
     left: 15%;
-    height: 50%;
+    height: 40%;
     width: 40%;
     background-color: #785ef0;
   }
@@ -66,7 +76,7 @@
 </head>
 <body>
   <div class="container">
-    <p style="font-size:60px;"> Question: What planet has the hottest atmosphere?</p>
+    <p style="font-size:30px;"> Question: What planet has the hottest atmosphere?</p>
     <body bgcolor=”#00000"></body>
   	<button  id="aaa">Earth</button>
     <a href="{{ url_for('answers')}}">
