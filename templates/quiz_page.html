@@ -2,16 +2,20 @@
 <html>
 <head>
 <style>
+
   .container {
     position: absolute;
   	top: 0px;
     left: 0px;
     height: 100%;
     width: 100%;
-    background-color: #f5f0f0;
+    background-color: #0000;
   }
   p{
     text-align: center;
+    color: #ffffff;
+
+    border-radius: 25px;
   }
   button {
   	color: #ffffff;
@@ -20,6 +24,9 @@
     border-color: #ffffff;
     border-width: thick;
     border-radius: 5% 5% 5% 5%;
+  }
+  p2{
+    font-size: 40px;
   }
   #aaa {
     position: relative;
@@ -60,11 +67,12 @@
 <body>
   <div class="container">
     <p style="font-size:60px;"> Question: What planet has the hottest atmosphere?</p>
-    
+    <body bgcolor=”#00000"></body>
   	<button  id="aaa">Earth</button>
     <a href="{{ url_for('answers')}}">
   	  <button id="bbb">Venus</button>
     </a>
+    <p2><br><br></p2>
 
     <a href="{{ url_for('instructions') }}">
         <button  id="eee">Go Home</button>
