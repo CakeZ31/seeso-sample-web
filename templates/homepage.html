@@ -17,37 +17,24 @@
         color: #191A42;
         }
         html, body{
-            background-color: #000000;
+            background-color: #f5f0f0;
             font-family:Dys;
         }
         h1{
             font-size: 60px;
             font-family: 'Dys';
             text-align: center;
-            color: #ffff;
-            background-color: transparent;
-            border: #ffff;
-            border-radius: 25px;
-            border-width: 10px;
-            border-style:solid;
-
+            color: #000000;
+            background-color: #309d30;
         }
         table, th, td {
             font-size: 25px;
             font-family: 'Dys';
             text-align: center;
-            color: #ffff;
+            color: #000000;
             background-color: transparent;
-            border: #ffff;
-            border-radius: 25px;
-            border-width: 1px;
-            border-style:solid;
-            width:100%;
-            left: 15%;
         }
-        td{
-            background-color: #785ef0;
-        }
+
         .center {
         margin-left: auto;
         margin-right: auto;
@@ -83,7 +70,9 @@
             <th>Purpose:</th>
         </tr>
         <tr>
-            <td>This project allows a user to use eye tracking as a way to continue their education in cases where user isn't able to physically interact with computer using keyboard or trackpad.</td>
+            <td>This project allows a user to use eye tracking as a way to continue their education <br>
+                in cases where user isn't able to physically interact with computer using keyboard or trackpad.
+            </td>
         </tr>
     </table>
     <a href="{{ url_for('instructions') }}">
