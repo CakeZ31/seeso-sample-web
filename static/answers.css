@@ -1,26 +1,35 @@
-/* #eee {
-    position: relative;
-    top: 10%;
-    left: 10%;
-    height: 15%;
-    width: 30%;
-    background-color: #797979;
+#eee {
+  position: relative;
+  top: 10%;
+  left: 10%;
+  height: 15%;
+  width: 30%;
+  background-color: #797979;
+}
+p{
+  text-align: center;
+}
+@font-face {
+  font-family: 'Dys';
+  src: url('../templates/OpenDyslexic-Regular.otf');
+  } 
+  html, body, button {
+      background-color: #000000;
+      color: #ffffff;
+      font-family:Dys;
   }
-  p{
-    text-align: center;
-  }
-  .flex-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    background-color: #f1f1f1;
-  }
-  .flex-container > div {
-    background-color: grey;
-    color: Black;
-    width: 130px;
-    margin: 5px;
-    text-align: center;
-    line-height: 25px;
-    font-size: 25px;
-  } */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: #000000;
+  color: #ffffff;
+}
+.flex-container > div {
+  color: #ffffff;
+  width: 30%;
+  margin: 5%;
+  text-align: center;
+  line-height: 10%;
+  font-size: 25px;
+} 

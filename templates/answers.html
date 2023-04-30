@@ -13,19 +13,17 @@
   <p style="font-size:60px;"> {{ q_a.question }}</p>
 
   <h3 style="text-align: center;"> {{ q_a.subject }}</h3>
-  
-  <p style="font-size:60px;"> {{ questions_tracker }}</p>
 
   <div class="flex-container">
     <div>
       {% if message[results_tracker] == 'Correct' %}
-        <p> You Answered Correctly: {{ q_a.correct_answer }} </p>
+        <p style="background-color: #dc267f;"> You Answered Correctly: {{ q_a.correct_answer }} </p>
       {% else %}
-        <p> You Answered Incorrectly: {{ q_a.wrong_answer }} </p>
+        <p style="background-color: #648fff;"> You Answered Incorrectly: {{ q_a.wrong_answer }} </p>
       {% endif %}
     </div>
     <div>
-      <p> Correct Answer: {{ q_a.correct_answer }} </p>
+      <p style="background-color: #648fff;"> Correct Answer: {{ q_a.correct_answer }} </p>
     </div>
   </div>
   {% if results_tracker < 4 %}
