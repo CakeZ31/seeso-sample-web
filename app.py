@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from random import shuffle
 import ast
+import subprocess
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -22,13 +23,11 @@ class Questions(db.Model):
     
     def repr(self):
         return '<Questions %r>' % self.id
-    
-    # def getquestion(request):
-    #     return 
-
 
 @app.route("/")
 def home():
+    cmd = 'shortcuts run "Turn Tracker On"'
+    subprocess.run(cmd, shell=True)
     return render_template('homepage.html')
 
 message = []
