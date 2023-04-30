@@ -86,14 +86,15 @@ def answers(message,q_a,results_tracker,questions_tracker):
 def results(questions_tracker, message):
     message = message.split()
     indexes = ast.literal_eval("".join(message))
-    print(indexes)
+    score = indexes.count('Correct')
+    temp_length = len(indexes)
     #query the questions so that we can get the whole row
     #https://stackoverflow.com/questions/866465/order-by-the-in-value-list // we can use the in_() function
     #https://stackoverflow.com/questions/16158809/sqlalchemy-filter-in-operator
     #eval the list we pass down https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
     questions_tracker = eval(questions_tracker)
     five_questions = Questions.query.filter(Questions.id.in_(questions_tracker)).all()
-    return render_template('results.html', questions_tracker = five_questions, message = indexes)
+    return render_template('results.html', questions_tracker = five_questions, message = indexes, score = score, total = temp_length)
 
 if __name__ == "__main__":
     app.run(debug=True)

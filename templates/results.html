@@ -1,49 +1,91 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <style>
-            #back {
-                height: 200px;
-                width: 30%;
-                background-color: #dc267f;
-                border-radius:20px;
-            }
-            #othershit {
-                height: 200px;
-                width: 30%;
-                margin-top: 100px;
-                background-color: #26dc54;
-                border-radius:20px;
-            }
-        </style>
-    </head>
-        <body style="background-color:#1D1D1D;">
-            <style>th,td,tr,tbody,table {
-                border-radius: 10px;
+    <style>
+        th,td,tr,tbody,table {
+        border-radius: 10px;
         }
-            </style>
-            {% with count=0 %}
-                {% for question in questions_tracker %}
-                <table align="right" border="1" cellpadding="1" cellspacing="1" style="margin-right:10%;width:800px;font-size:18px;color:#d5d5d5;background-color:#2D4D2D">
-                    <tbody>
-                        <tr>
-                            <td>
-                            <p>{{ question.question }}</p>
-                            {% with count=loop.index0%}
-                                {% if message[count] == "Correct" %}
-                                    <p>You Answered Correctly: {{ question.correct_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
-                                                            
-                                {% else %}
-                                    <p>You Answered Incorrectly: {{ question.wrong_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
-                                                                
-                                {% endif %}
-                            {% endwith %}
-                            </td>
-                        </tr>
-                </body>
-                {% endfor %}
-            {% endwith %}
+        h2{
+            font-size: 75px;
+            margin-top: 5px
+        }
+        h1{
+            font-size: 100px;
+            margin-bottom: 5px;
+        }
+        div.flex-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        div.flex-container div.column{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #eee{
+            color: #ffffff;
+            font-weight: bolder;
+            font-size: xx-large;
+            border-color: #ffffff;
+            border-width: thick;
+            border-radius: 5% 5% 5% 5%;
+            background-color: #797979;
+            width: 400px;
+            height: 200px;
+        }
+
+    </style>
+    <head>
+        <meta charset="utf-8">
+        <title>Results</title>
+    </head>
+        <body style="background-color: #f5f0f0;">
+
+            <div class="flex-container">
+                <div class='column' id='left'>
+                    <h1> SCORE: </h1>
+
+                    <h2>{{ score }} / {{ total }}</h2>
+
+                    <a href="{{ url_for('instructions') }}">
+                        <button  id="eee">Go Home</button>
+                    </a>
+                </div>
+                
+                <div class='column'>
+                    {% with count=0 %}
+                        {% for question in questions_tracker %}
+                        <table align="right" border="1" cellpadding="1" cellspacing="3" style="width:800px;font-size:18px;color:white;background-color: #309d30;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                    <p>{{ question.question }}</p>
+                                    {% with count=loop.index0%}
+                                    <div class="column-row">
+                                        <div>
+                                            {% if message[count] == "Correct" %}
+                                                <p>You Answered Correctly: {{ question.correct_answer }}</p>       
+                                            {% else %}
+                                                <p>You Answered Incorrectly: {{ question.wrong_answer }}</p>                          
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            Correct Answer: {{ question.correct_answer }} </p> 
+                                        </div> 
+                                    <div>
+                                    {% endwith %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    {% endwith %}
+                 </div>
+            </div>
+        </body>
 </html>
