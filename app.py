@@ -2,6 +2,7 @@ from flask import Flask,render_template,url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from random import shuffle
+import ast
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -54,7 +55,7 @@ def questions():
             
         return redirect(url_for('.answers', message = ' '.join(message), q_a= q_a.id, results_tracker = results_tracker, questions_tracker = questions_tracker))
     else:
-        q_a = Questions.query.order_by(func.random()).first()
+        q_a = Questions.query.filter(~Questions.id.in_(questions_tracker)).order_by(func.random()).first()
         options = [q_a.correct_answer, q_a.wrong_answer]
         shuffle(options)
         return render_template('quiz_page.html', q_a=q_a.question, q_a_id=q_a.id, option1 = options[0], option2=options[1])
@@ -84,14 +85,15 @@ def answers(message,q_a,results_tracker,questions_tracker):
 @app.route("/results/<questions_tracker>/<message>")
 def results(questions_tracker, message):
     message = message.split()
-    print(questions_tracker)
+    indexes = ast.literal_eval("".join(message))
+    print(indexes)
     #query the questions so that we can get the whole row
     #https://stackoverflow.com/questions/866465/order-by-the-in-value-list // we can use the in_() function
     #https://stackoverflow.com/questions/16158809/sqlalchemy-filter-in-operator
     #eval the list we pass down https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
     questions_tracker = eval(questions_tracker)
     five_questions = Questions.query.filter(Questions.id.in_(questions_tracker)).all()
-    return render_template('results.html', questions_tracker = five_questions, message = message)
+    return render_template('results.html', questions_tracker = five_questions, message = indexes)
 
 if __name__ == "__main__":
     app.run(debug=True)

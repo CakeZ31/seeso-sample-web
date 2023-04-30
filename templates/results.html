@@ -23,26 +23,27 @@
                 border-radius: 10px;
         }
             </style>
-        {% with count = 0 %}
-            {% for question in questions_tracker %}
-            <table align="right" border="1" cellpadding="1" cellspacing="1" style="margin-right:10%;width:800px;font-size:18px;color:#d5d5d5;background-color:#2D4D2D">
-                <tbody>
-                    <tr>
-                        <td>
-                        <p>{{ question.question }}</p>
-
-                        {% if message[count] == 'Correct' %}
-                            <p>You Answered Correctly: {{ question.correct_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
-                                                  {% set count = count+1 %}
-                        {% else %}
-                            <p>You Answered Incorrectly: {{ question.wrong_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
-                                                  {% set count = count+1 %}
-                        {% endif %}
-                        </td>
-                    </tr>
-            </body>
-            {% endfor %}
-        {% endwith %}
+            {% with count=0 %}
+                {% for question in questions_tracker %}
+                <table align="right" border="1" cellpadding="1" cellspacing="1" style="margin-right:10%;width:800px;font-size:18px;color:#d5d5d5;background-color:#2D4D2D">
+                    <tbody>
+                        <tr>
+                            <td>
+                            <p>{{ question.question }}</p>
+                            {% with count=loop.index0%}
+                                {% if message[count] == "Correct" %}
+                                    <p>You Answered Correctly: {{ question.correct_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
+                                                            
+                                {% else %}
+                                    <p>You Answered Incorrectly: {{ question.wrong_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
+                                                                
+                                {% endif %}
+                            {% endwith %}
+                            </td>
+                        </tr>
+                </body>
+                {% endfor %}
+            {% endwith %}
 </html>
