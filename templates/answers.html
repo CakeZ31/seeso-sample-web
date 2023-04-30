@@ -13,6 +13,8 @@
   <p style="font-size:60px;"> {{ q_a.question }}</p>
 
   <h3 style="text-align: center;"> {{ q_a.subject }}</h3>
+  
+  <p style="font-size:60px;"> {{ questions_tracker }}</p>
 
   <div class="flex-container">
     <div>
@@ -33,7 +35,7 @@
   {% endif %}
 
   {% if results_tracker == 4 %}
-  <a href="{{ url_for('results') }}">
+  <a href="{{ url_for('.results', questions_tracker = questions_tracker, message = message) }}">
     <button style="width: 300px; height: 200px; margin-left: 25px" id="eee">Results</button>
   </a>
   {% endif %}

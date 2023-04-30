@@ -2,7 +2,6 @@ from flask import Flask,render_template,url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from random import shuffle
-from operator import length_hint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -46,14 +45,14 @@ def questions():
         else:
             message.append('Incorrect')
             
-        temp_length = length_hint(message)
+        temp_length = len(message)
             
         if temp_length != 1:
             results_tracker += 1
         else:
             results_tracker = 0
             
-        return redirect(url_for('.answers', message = ' '.join(message), q_a= q_a.id, results_tracker = results_tracker))
+        return redirect(url_for('.answers', message = ' '.join(message), q_a= q_a.id, results_tracker = results_tracker, questions_tracker = questions_tracker))
     else:
         q_a = Questions.query.order_by(func.random()).first()
         options = [q_a.correct_answer, q_a.wrong_answer]
@@ -63,25 +62,36 @@ def questions():
 @app.route("/instructions")
 def instructions():
     message.clear()
+    questions_tracker.clear()
     return render_template('instructions.html')
-
-@app.route("/results")
-def results():
-    return render_template('results.html')
 
 # had a logical error since i cannot pass list in the url https://www.programiz.com/python-programming/methods/string/join
 # I need to convert it back into a list after recieveing it
 # we need to get POST
-@app.route("/answers/<message>/<int:q_a>/<int:results_tracker>")
-def answers(message,q_a,results_tracker):
+# make a list to keep track of the questions to later so the answers
+@app.route("/answers/<message>/<int:q_a>/<int:results_tracker>/<questions_tracker>")
+def answers(message,q_a,results_tracker,questions_tracker):
     message = message.split()
     q_a = Questions.query.get(q_a)
     if ((results_tracker) == 0):
-        return render_template('answers.html', message = message, q_a = q_a, results_tracker = results_tracker)
+        return render_template('answers.html', message = message, q_a = q_a, results_tracker = results_tracker, questions_tracker = questions_tracker)
     elif (results_tracker < 5):
-        return render_template('answers.html', message = message, q_a = q_a, results_tracker = results_tracker)
+        return render_template('answers.html', message = message, q_a = q_a, results_tracker = results_tracker, questions_tracker = questions_tracker)
     else:
-        return redirect(url_for('.results'))
+        #https://www.geeksforgeeks.org/python-program-to-convert-list-of-integer-to-list-of-string/
+        return redirect(url_for('.results', questions_tracker = list(map(str, questions_tracker)), message = ' '.join(message)))
+
+@app.route("/results/<questions_tracker>/<message>")
+def results(questions_tracker, message):
+    message = message.split()
+    print(questions_tracker)
+    #query the questions so that we can get the whole row
+    #https://stackoverflow.com/questions/866465/order-by-the-in-value-list // we can use the in_() function
+    #https://stackoverflow.com/questions/16158809/sqlalchemy-filter-in-operator
+    #eval the list we pass down https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
+    questions_tracker = eval(questions_tracker)
+    five_questions = Questions.query.filter(Questions.id.in_(questions_tracker)).all()
+    return render_template('results.html', questions_tracker = five_questions, message = message)
 
 if __name__ == "__main__":
     app.run(debug=True)

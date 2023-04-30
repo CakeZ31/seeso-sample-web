@@ -1,61 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-    
-    *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-  .body {
-    height: 100vh;
-    width: 100%;
-    background-image: url('https://gifdb.com/images/file/just-keep-swimming-animated-school-of-fish-6yy94igqkvkqhet3.gif');
-   background-size: cover;
-  }
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-  h1 {
-        text-align: center;
-        background-color: white; 
-    }
-    p { 
-        text-align: center;
-     }
+        @font-face {
+        font-family: 'Dys';
+        src: url('OpenDyslexic-Regular.otf');
+        } 
+        * {
+        line-height:200%;
+        color: #191A42;
+        }
+        html, body{
+            background-color: #000000;
+            font-family:Dys;
+        }
+        h1{
+            font-size: 60px;
+            font-family: 'Dys';
+            text-align: center;
+            color: #ffff;
+            background-color: transparent;
+            border: #ffff;
+            border-radius: 25px;
+            border-width: 10px;
+            border-style:solid;
 
-    button{
-        display: block;
-        width: 30%;
-        height: 30%;
-        position: absolute;
-        top: 50%;
-        left: 35%;
-        border: none;
-        background-color: #04AA6D;
-        padding: 14px 28px;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-    }
-    
-</style>
+        }
+        table, th, td {
+            font-size: 25px;
+            font-family: 'Dys';
+            text-align: center;
+            color: #ffff;
+            background-color: transparent;
+            border: #ffff;
+            border-radius: 25px;
+            border-width: 1px;
+            border-style:solid;
+            width:100%;
+            left: 15%;
+        }
+        td{
+            background-color: #785ef0;
+        }
+        .center {
+        margin-left: auto;
+        margin-right: auto;
+        }
+        
+        button{
+            display: block;
+            font-family: 'Dys';
+            width: 30%;
+            height: 30%;
+            position: absolute;
+            top: 60%;
+            left: 35%;
+            border: black;
+            border-radius: 25px;
+            background-color: #ffb000;
+            padding: 14px 28px;
+            font-size: 60px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <div class="body"> 
-        <h1 style="font-size:60px;">WELCOME TO fEYEsh<br><br></h1>
-        <p style="font-size:25px;"><br><br>
-            Purpose: This project allows a user to use eye tracking/head tracker as a way to continue
-            their education in cases where physical interaction with 
-            a computer isn't possible or feasible.
-        <br><br><br><br> </p>
-        
-        <a href="{{ url_for('instructions') }}">
-            <button>Read Instructions</button>
-        </a>
-    </div>
+    <h1>WELCOME TO fEYEsh</h1>
+    <br><br>
+    <table class="center">
+        <tr>
+            <th>Purpose:</th>
+        </tr>
+        <tr>
+            <td>This project allows a user to use eye tracking as a way to continue their education in cases where user isn't able to physically interact with computer using keyboard or trackpad.</td>
+        </tr>
+    </table>
+    <a href="{{ url_for('instructions') }}">
+        <button type="button" id="button">Start</button>
+    </a>
 </body>
 </html>

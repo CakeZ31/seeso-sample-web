@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<style>
-    @font-face{
-    font-family: Dys;
-    src: url(OpenDyslexic-Regular.otf);
-
-    }
-
-    html, body, button {
-        font-family: Dys;
-    }
-</style>
 <html>
     
     <head>
@@ -34,60 +23,26 @@
                 border-radius: 10px;
         }
             </style>
-        <table align="right" border="1" cellpadding="1" cellspacing="1" style="margin-right:10%;width:800px;font-size:18px;color:#d5d5d5;background-color:#2D4D2D">
-            <tbody>
-                <tr>
-                    <td>
-                    <p>Question 1:&nbsp;</p>
+        {% with count = 0 %}
+            {% for question in questions_tracker %}
+            <table align="right" border="1" cellpadding="1" cellspacing="1" style="margin-right:10%;width:800px;font-size:18px;color:#d5d5d5;background-color:#2D4D2D">
+                <tbody>
+                    <tr>
+                        <td>
+                        <p>{{ question.question }}</p>
 
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <p>Question 2:&nbsp;</p>
-
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <p>Question 3:&nbsp;</p>
-
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <p>Question 4:&nbsp;</p>
-
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <p>Question 5:&nbsp;</p>
-
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <p>Question 6</p>
-
-                    <p>You Answered:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer:</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <p><center><span style="font-size:40px;color:#d5d5d5;">Results: 4/6 Correct</span></center></p>
-
-        <p><span style="font-size:44px"></span></span></p>
-        <a href="{{ url_for('instructions') }}">
-            <center><button type="button" id="back" style="font-size:30px;">Instructions</button></center>
-        </a>
-        
-        </body>
+                        {% if message[count] == 'Correct' %}
+                            <p>You Answered Correctly: {{ question.correct_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
+                                                  {% set count = count+1 %}
+                        {% else %}
+                            <p>You Answered Incorrectly: {{ question.wrong_answer }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Correct Answer: {{ question.correct_answer }} </p>
+                                                  {% set count = count+1 %}
+                        {% endif %}
+                        </td>
+                    </tr>
+            </body>
+            {% endfor %}
+        {% endwith %}
 </html>
