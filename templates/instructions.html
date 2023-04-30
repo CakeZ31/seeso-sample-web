@@ -2,63 +2,95 @@
 <html lang="en">
 <head>
     <style>
-    
         *{
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-        div{
-            
-        }
-        .body {
-            height: 150vh;
-            width: 100%;
-            background-image: url('https://gifdb.com/images/file/just-keep-swimming-animated-school-of-fish-6yy94igqkvkqhet3.gif');
-        background-size: cover;
-        }
 
+        @font-face {
+        font-family: 'Dys';
+        src: url('OpenDyslexic-Regular.otf');
+        } 
+        * {
+        line-height:200%;
+        color: #191A42;
+        }
+        html, body{
+            background-color: #000000;
+            font-family:Dys;
+        }
         h1{
+            font-size: 60px;
+            font-family: 'Dys';
             text-align: center;
-            background-color: white; 
-        }
-        p { 
-            text-align: center;
-        }
+            color: #ffff;
+            background-color: transparent;
+            border: #ffff;
+            border-radius: 25px;
+            border-width: 10px;
+            border-style:solid;
 
+        }
+        table, th, td {
+            font-size: 25px;
+            font-family: 'Dys';
+            text-align: center;
+            color: #ffff;
+            background-color: transparent;
+            border: #ffff;
+            border-radius: 25px;
+            border-width: 1px;
+            border-style:solid;
+            width:100%;
+            left: 15%;
+        }
+        td{
+            background-color: #785ef0;
+        }
+        .center {
+        margin-left: auto;
+        margin-right: auto;
+        }
+        
         button{
             display: block;
+            font-family: 'Dys';
             width: 30%;
             height: 30%;
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 35%;
-            border: none;
-            background-color: #04AA6D;
+            border: black;
+            border-radius: 25px;
+            background-color: #ffb000;
             padding: 14px 28px;
-            font-size: 16px;
+            font-size: 60px;
             cursor: pointer;
             text-align: center;
         }
     </style>
-
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-    <div class="body"> 
-        <h1 style="font-size:60px;">QUIZ TIME<br><br></h1>
-        <p style="font-size:25px;"><br><br>
-            We will provide you 5 questions that will vary in subjects and difficulty.<br><br>
-            If you know the answer or want to guess, look directly at the answer for 3 seconds so it can be selected.<br><br>
-            If you choose to not answer the question, look directly at the skip button for 3 second so it can be selected.
-        </p>
-        
-        <a href="{{ url_for('questions') }}">
-            <button>Start</button>
-        </a>
-    </div>
+    <h1>WELCOME TO fEYEsh</h1>
+    <br><br>
+    <table class="center">
+        <tr>
+            <th>Instructions:</th>
+        </tr>
+        <tr>
+            <td>We will provide you 5 questions that will vary in subjects and difficulty.<br><br>
+                If you know the answer or want to guess, look directly at the answer for 3 seconds so it can be selected.<br><br>
+                If you choose to not answer the question, look directly at the skip button for 3 second so it can be selected.
+            </td>
+        </tr>
+    </table>
+    <a href="{{ url_for('questions') }}">
+        <button type="button" id="button">Start</button>
+    </a>
 </body>
 </html>
